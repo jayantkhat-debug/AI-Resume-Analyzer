@@ -20,3 +20,7 @@ Technologies Used
 Author
 
 Jayant Khatri
+## 🚀 Live Demo
+
+👉 Click here to try the AI Resume Analyzer:
+https://ai-resume-analyzer-by-jayant.streamlit.app/
