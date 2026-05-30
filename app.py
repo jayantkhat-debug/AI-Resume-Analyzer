@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("AI Resume Analyzer")
+st.title("AI Resume Analyzer V2")
 
 resume = st.text_area(
     "Paste Your Resume Here",
@@ -9,26 +9,66 @@ resume = st.text_area(
 
 if st.button("Analyze Resume"):
 
-    st.success("Resume Analysis Complete!")
+    score = 50
 
-    st.subheader("Strengths")
+    st.subheader("ATS Score")
 
-    st.write("✅ Professional resume structure")
-    st.write("✅ Relevant experience included")
-    st.write("✅ Skills section present")
+    if "skills" in resume.lower():
+        score += 10
 
-    st.subheader("Suggested Improvements")
+    if "projects" in resume.lower():
+        score += 10
 
-    st.write("• Add more measurable achievements")
-    st.write("• Include project descriptions")
-    st.write("• Add LinkedIn and GitHub links")
+    if "linkedin.com" in resume.lower():
+        score += 10
 
-    st.subheader("Missing Skills")
+    if "github.com" in resume.lower():
+        score += 10
 
-    st.write("• Data Analysis")
-    st.write("• AI Tools")
-    st.write("• Project Management")
+    if len(resume) > 500:
+        score += 10
 
-    st.subheader("Resume Score")
+    if score > 100:
+        score = 100
 
-    st.write("75 / 100")
+    st.write(f"ATS Score: {score}/100")
+
+    st.subheader("Checks")
+
+    if "skills" in resume.lower():
+        st.success("Skills section found")
+    else:
+        st.error("Skills section missing")
+
+    if "projects" in resume.lower():
+        st.success("Projects section found")
+    else:
+        st.error("Projects section missing")
+
+    if "linkedin.com" in resume.lower():
+        st.success("LinkedIn profile found")
+    else:
+        st.error("LinkedIn profile missing")
+
+    if "github.com" in resume.lower():
+        st.success("GitHub profile found")
+    else:
+        st.error("GitHub profile missing")
+
+    st.subheader("Recommendations")
+
+    if "github.com" not in resume.lower():
+        st.write("• Add your GitHub profile")
+
+    if "linkedin.com" not in resume.lower():
+        st.write("• Add your LinkedIn profile")
+
+    if "projects" not in resume.lower():
+        st.write("• Add a Projects section")
+
+    if "skills" not in resume.lower():
+        st.write("• Add a Skills section")
+
+    st.write("• Add measurable achievements")
+    st.write("• Include relevant certifications")
+    
